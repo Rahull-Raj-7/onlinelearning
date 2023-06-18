@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assignment Submission</title>
+    <script>
+        function submitAssignment() {
+            // Get the file input element
+            var fileInput = document.getElementById('assignment');
+
+            // Check if a file is selected
+            if (fileInput.files.length > 0) {
+                // Get the selected file
+                var file = fileInput.files[0];
+
+                // Create a FormData object to send the file
+                var formData = new FormData();
+                formData.append('assignment', file);
+
+                // Send the assignment file using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/submit-assignment', true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Assignment submitted successfully
+                        alert('Assignment submitted!');
+                    } else {
+                        // Error occurred while submitting the assignment
+                        alert('Error submitting the assignment. Please try again.');
+                    }
+                };
+                xhr.send(formData);
+            } else {
+                // No file selected
+                alert('Please select a file to submit.');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Assignment Submission</h1>
+    <form>
+        <input type="file" id="assignment">
+        <button type="button" onclick="submitAssignment()">Submit</button>
+    </form>
+</body>
+
+</html>
